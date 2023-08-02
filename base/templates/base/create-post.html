@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <main>
+    <div class="container" style="width: 800px; margin-top: 100px; margin-bottom: 50px">
+      {% if user.is_authenticated %}
+        <h2>Create a New Post</h2>
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="post-title">Title</label>
+            <input type="text" class="form-control" id="post-title" name="title" required>
+          </div>
+          <div class="form-group">
+            <label for="post-body">Body</label>
+            <textarea class="form-control" id="post-body" name="body" rows="6" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Create Post</button>
+        </form>
+      {% else %}
+        <p>Please <a href="{% url 'login' %}">login</a> to create a post.</p>
+      {% endif %}
+    </div>
+  </main>
+{% endblock content %}
